@@ -142,7 +142,7 @@ run "policy_guardrails" {
 run "audit_only_rollout" {
   command = plan
   variables {
-    policy_enforcement = false
+    policy_enforcement  = false
     vendor_principal_id = null
   }
 
