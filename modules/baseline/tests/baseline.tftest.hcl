@@ -46,25 +46,25 @@ mock_provider "azurerm" {
   }
   mock_resource "azurerm_log_analytics_workspace" {
     defaults = {
-      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.OperationalInsights/workspaces/contoso-logs"
+      id           = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.OperationalInsights/workspaces/contoso-logs"
       workspace_id = "55555555-5555-5555-5555-555555555555"
     }
   }
   mock_resource "azurerm_key_vault" {
     defaults = {
-      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.KeyVault/vaults/contoso-kv"
+      id        = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.KeyVault/vaults/contoso-kv"
       vault_uri = "https://contoso-kv.vault.azure.net/"
     }
   }
   mock_resource "azurerm_key_vault_key" {
     defaults = {
-      id = "https://contoso-kv.vault.azure.net/keys/contoso-storage-cmk/0123456789abcdef0123456789abcdef"
+      id             = "https://contoso-kv.vault.azure.net/keys/contoso-storage-cmk/0123456789abcdef0123456789abcdef"
       versionless_id = "https://contoso-kv.vault.azure.net/keys/contoso-storage-cmk"
     }
   }
   mock_resource "azurerm_storage_account" {
     defaults = {
-      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/contosodata"
+      id                    = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/contosodata"
       primary_blob_endpoint = "https://contosodata.blob.core.windows.net/"
     }
   }
@@ -75,9 +75,9 @@ mock_provider "azurerm" {
   }
   mock_resource "azurerm_user_assigned_identity" {
     defaults = {
-      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-id"
+      id           = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-id"
       principal_id = "66666666-6666-6666-6666-666666666666"
-      client_id = "77777777-7777-7777-7777-777777777777"
+      client_id    = "77777777-7777-7777-7777-777777777777"
     }
   }
   mock_resource "azurerm_container_app_environment" {
@@ -102,7 +102,7 @@ mock_provider "azurerm" {
   }
   mock_resource "azurerm_role_definition" {
     defaults = {
-      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Authorization/roleDefinitions/88888888-8888-8888-8888-888888888888"
+      id                          = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Authorization/roleDefinitions/88888888-8888-8888-8888-888888888888"
       role_definition_resource_id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Authorization/roleDefinitions/88888888-8888-8888-8888-888888888888"
     }
   }
