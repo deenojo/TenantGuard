@@ -1,0 +1,7 @@
+subscription_id        = "00000000-0000-0000-0000-000000000000"
+prefix                 = "contoso"
+location               = "eastus2"
+allowed_locations      = ["eastus2", "centralus"]
+security_contact_email = "security@contoso.example"
+# vendor_principal_id  = "<object id of the vendor operator group in Contoso's tenant>"
+policy_enforcement     = true
