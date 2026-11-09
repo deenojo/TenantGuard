@@ -181,7 +181,7 @@ run "least_privilege" {
     error_message = "The vendor must not be able to change access, networking or read storage keys."
   }
   assert {
-    condition     = azurerm_role_definition.vendor_operator.assignable_scopes == [azurerm_resource_group.this.id]
+    condition     = length(azurerm_role_definition.vendor_operator.assignable_scopes) == 1 && one(azurerm_role_definition.vendor_operator.assignable_scopes) == azurerm_resource_group.this.id
     error_message = "The vendor role must be assignable only in this resource group."
   }
   assert {
