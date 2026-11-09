@@ -9,6 +9,103 @@ mock_provider "azurerm" {
       subscription_id = "33333333-3333-3333-3333-333333333333"
     }
   }
+  mock_resource "azurerm_resource_group" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg"
+    }
+  }
+  mock_resource "azurerm_virtual_network" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Network/virtualNetworks/contoso-vnet"
+    }
+  }
+  mock_resource "azurerm_subnet" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Network/virtualNetworks/contoso-vnet/subnets/workload"
+    }
+  }
+  mock_resource "azurerm_network_security_group" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Network/networkSecurityGroups/contoso-nsg"
+    }
+  }
+  mock_resource "azurerm_public_ip" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Network/publicIPAddresses/contoso-nat-pip"
+    }
+  }
+  mock_resource "azurerm_nat_gateway" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Network/natGateways/contoso-nat"
+    }
+  }
+  mock_resource "azurerm_private_dns_zone" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net"
+    }
+  }
+  mock_resource "azurerm_log_analytics_workspace" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.OperationalInsights/workspaces/contoso-logs"
+      workspace_id = "55555555-5555-5555-5555-555555555555"
+    }
+  }
+  mock_resource "azurerm_key_vault" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.KeyVault/vaults/contoso-kv"
+      vault_uri = "https://contoso-kv.vault.azure.net/"
+    }
+  }
+  mock_resource "azurerm_key_vault_key" {
+    defaults = {
+      id = "https://contoso-kv.vault.azure.net/keys/contoso-storage-cmk/0123456789abcdef0123456789abcdef"
+      versionless_id = "https://contoso-kv.vault.azure.net/keys/contoso-storage-cmk"
+    }
+  }
+  mock_resource "azurerm_storage_account" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/contosodata"
+      primary_blob_endpoint = "https://contosodata.blob.core.windows.net/"
+    }
+  }
+  mock_resource "azurerm_storage_container" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/contosodata/blobServices/default/containers/app-data"
+    }
+  }
+  mock_resource "azurerm_user_assigned_identity" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/contoso-id"
+      principal_id = "66666666-6666-6666-6666-666666666666"
+      client_id = "77777777-7777-7777-7777-777777777777"
+    }
+  }
+  mock_resource "azurerm_container_app_environment" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.App/managedEnvironments/contoso-env"
+    }
+  }
+  mock_resource "azurerm_monitor_action_group" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Insights/actionGroups/contoso-security"
+    }
+  }
+  mock_resource "azurerm_policy_definition" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/providers/Microsoft.Authorization/policyDefinitions/tg-contoso-policy"
+    }
+  }
+  mock_resource "azurerm_resource_group_policy_assignment" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Authorization/policyAssignments/tg-policy"
+    }
+  }
+  mock_resource "azurerm_role_definition" {
+    defaults = {
+      id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Authorization/roleDefinitions/88888888-8888-8888-8888-888888888888"
+      role_definition_resource_id = "/subscriptions/33333333-3333-3333-3333-333333333333/resourceGroups/contoso-rg/providers/Microsoft.Authorization/roleDefinitions/88888888-8888-8888-8888-888888888888"
+    }
+  }
   mock_data "azurerm_policy_set_definition" {
     defaults = {
       id = "/providers/Microsoft.Authorization/policySetDefinitions/cis-mock"
@@ -62,7 +159,7 @@ run "no_shared_secrets_and_strong_crypto" {
     error_message = "Storage must be keyless, TLS 1.2, double-encrypted and use the CMK."
   }
   assert {
-    condition     = azurerm_key_vault.this.enable_rbac_authorization && azurerm_key_vault.this.purge_protection_enabled
+    condition     = azurerm_key_vault.this.rbac_authorization_enabled && azurerm_key_vault.this.purge_protection_enabled
     error_message = "Key Vault must be RBAC-only and purge-protected."
   }
   assert {
